@@ -1,1 +1,168 @@
-# Veora3
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Viora – The Ultimate AI Platform</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0b0b0b;
+      color: #ffffff;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #cccccc;
+    }
+
+    nav {
+      background: #111;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #00ffe0;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    section {
+      padding: 100px 20px;
+      border-bottom: 1px solid #222;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #00ffe0;
+      margin-bottom: 10px;
+    }
+
+    section p {
+      font-size: 1rem;
+      color: #bbbbbb;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #111;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Viora</h1>
+  <p>The Most Advanced AI Platform Ever Created</p>
+</header>
+
+<nav>
+  <a href="#imagegen">Image Gen</a>
+  <a href="#videogen">Video Gen</a>
+  <a href="#faceswap">Face Swap</a>
+  <a href="#voicestudio">Voice AI</a>
+  <a href="#sitebuilder">Site Builder</a>
+  <a href="#socialtools">Social/Dating</a>
+  <a href="#personacreator">Persona Creator</a>
+  <a href="#apicontrol">API Access</a>
+  <a href="#modelupload">Model Uploader</a>
+  <a href="#userdash">User Dashboard</a>
+</nav>
+
+<section id="imagegen">
+  <h2>Image Generator</h2>
+  <p>Create ultra-realistic visuals with AI trained on custom models. Supports character creation, environment design, and more.</p>
+</section>
+
+<section id="videogen">
+  <h2>Video Generator</h2>
+  <p>Turn text into full video scenes. Powered by original video models that push beyond current limitations.</p>
+</section>
+
+<section id="faceswap">
+  <h2>Face Swap</h2>
+  <p>Next-gen face swap tool with support for custom expressions, realism control, and multi-angle support.</p>
+</section>
+
+<section id="voicestudio">
+  <h2>Voice AI Studio</h2>
+  <p>Generate realistic speech, AI vocals, and singing voices. Supports emotional tone, multi-language, and full music integration.</p>
+</section>
+
+<section id="sitebuilder">
+  <h2>Website Builder</h2>
+  <p>Let users create fully custom websites with full design freedom, reset-to-default, and live editing.</p>
+</section>
+
+<section id="socialtools">
+  <h2>Social & Dating Tools</h2>
+  <p>AI-powered social and dating platform builder with optional persona matching, video chat, and more.</p>
+</section>
+
+<section id="personacreator">
+  <h2>Persona Creator</h2>
+  <p>Design unique AI avatars with custom voices, looks, and personalities — usable across the entire platform.</p>
+</section>
+
+<section id="apicontrol">
+  <h2>API & Model Access</h2>
+  <p>Full API integration for developers. Build your own tools, train models, and link to external platforms.</p>
+</section>
+
+<section id="modelupload">
+  <h2>Model Uploader</h2>
+  <p>Upload and manage your own image, video, or voice models. Private or public access control included.</p>
+</section>
+
+<section id="userdash">
+  <h2>User Dashboard</h2>
+  <p>Personal space for every user to manage their creations, settings, templates, and activity logs.</p>
+</section>
+
+<footer>
+  &copy; 2025 Viora — Built by Thomas Wachter. All rights reserved.
+</footer>
+
+</body>
+</html>
