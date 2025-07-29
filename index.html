@@ -1,133 +1,77 @@
-### Revolutionary AI Model Suite - Extended Version (10,000 characters)
-# Includes logging, analytics, full error handling, and demo HTML generation support
+# High-End Custom Image API
 
-from fastapi import FastAPI, WebSocket, Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
-from pathlib import Path
-import uvicorn
-from datetime import datetime
-import json
-import uuid
-import os
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-End Custom Image API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-output {
+            margin-top: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
 
-from app.models.revolutionary_models import RevolutionaryAIModels
-from app.db.database import init_db, save_generation_to_db
+<header>
+    <h1>High-End Custom Image API</h1>
+</header>
 
-# Create output directory
-Path("generated").mkdir(exist_ok=True)
+<div class="container">
+    <h2>Generate Your Custom Image</h2>
+    <form id="imageForm">
+        <label for="prompt">Enter Image Description:</label><br>
+        <input type="text" id="prompt" name="prompt" required><br><br>
+        <button type="submit">Generate Image</button>
+    </form>
 
-app = FastAPI(title="Revolutionary AI Suite", version="1.1.0")
-app.mount("/static", StaticFiles(directory="generated"), name="static")
+    <div class="image-output" id="imageOutput"></div>
+</div>
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+<script>
+    document.getElementById('imageForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const prompt = document.getElementById('prompt').value;
+        const apiUrl = `https://api.example.com/generate-image?description=${encodeURIComponent(prompt)}`;
 
-revolutionary_ai = RevolutionaryAIModels()
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const imageOutput = document.getElementById('imageOutput');
+                imageOutput.innerHTML = `<img src="${data.imageUrl}" alt="Generated Image">`;
+            })
+            .catch(error => {
+                console.error('Error generating image:', error);
+            });
+    });
+</script>
 
-@app.on_event("startup")
-def startup_event():
-    init_db()
-    print("✅ Revolutionary AI Suite initialized.")
-
-@app.get("/", response_class=HTMLResponse)
-async def root():
-    return """
-    <html>
-        <head><title>Revolutionary AI Suite</title></head>
-        <body style='font-family:Arial;text-align:center;margin-top:50px;'>
-            <h1>🚀 Revolutionary AI Suite is Running</h1>
-            <p>Visit <code>/api/health</code> for system status.</p>
-        </body>
-    </html>
-    """
-
-@app.get("/api/health")
-async def health():
-    return {
-        "status": "ok",
-        "timestamp": datetime.now().isoformat(),
-        "models": ["UltraVision", "VortexVox", "EclipseSynth", "NeuroText", "DreamForge"]
-    }
-
-@app.post("/api/revolutionary/ultravision")
-async def generate_ultravision(request: Request):
-    data = await request.json()
-    result = await revolutionary_ai.ultravision.generate_image(
-        prompt=data.get("prompt", ""),
-        style=data.get("style", "photorealistic"),
-        resolution=data.get("resolution", "1024x1024")
-    )
-    await save_generation_to_db("UltraVision", data.get("prompt"), result)
-    return result
-
-@app.post("/api/revolutionary/vortexvox")
-async def generate_vortexvox(request: Request):
-    data = await request.json()
-    result = await revolutionary_ai.vortexvox.generate_voice(
-        prompt=data.get("prompt", ""),
-        voice_type=data.get("voice_type", "speaking"),
-        emotion=data.get("emotion", "calm")
-    )
-    await save_generation_to_db("VortexVox", data.get("prompt"), result)
-    return result
-
-@app.post("/api/revolutionary/eclipsesynth")
-async def generate_eclipsesynth(request: Request):
-    data = await request.json()
-    result = await revolutionary_ai.eclipsesynth.generate_video(
-        prompt=data.get("prompt", ""),
-        duration=data.get("duration", 10),
-        style=data.get("style", "cinematic")
-    )
-    await save_generation_to_db("EclipseSynth", data.get("prompt"), result)
-    return result
-
-@app.post("/api/revolutionary/neurotext")
-async def generate_neurotext(request: Request):
-    data = await request.json()
-    result = await revolutionary_ai.neurotext.generate_text(
-        prompt=data.get("prompt", ""),
-        max_length=data.get("max_length", 1500)
-    )
-    await save_generation_to_db("NeuroText", data.get("prompt"), result)
-    return result
-
-@app.post("/api/revolutionary/dreamforge")
-async def generate_dreamforge(request: Request):
-    data = await request.json()
-    result = await revolutionary_ai.dreamforge.create_multimodal_content(
-        prompt=data.get("prompt", ""),
-        output_types=data.get("output_types", ["image", "text"])
-    )
-    await save_generation_to_db("DreamForge", data.get("prompt"), result)
-    return result
-
-@app.websocket("/ws")
-async def websocket_handler(websocket: WebSocket):
-    await websocket.accept()
-    try:
-        while True:
-            message = await websocket.receive_text()
-            data = json.loads(message)
-            await websocket.send_text(json.dumps({
-                "type": "progress",
-                "message": f"Processing: {data.get('prompt', '')[:40]}...",
-                "progress": 50
-            }))
-            await websocket.send_text(json.dumps({
-                "type": "complete",
-                "message": "✅ Generation completed.",
-                "progress": 100
-            }))
-    except Exception as e:
-        print(f"⚠️ WebSocket error: {e}")
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
+</body>
+</html>
