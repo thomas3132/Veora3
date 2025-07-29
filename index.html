@@ -1,111 +1,76 @@
-# Full-Stack AI Platform Codebase
+# backend/app.py
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
-## Frontend (HTML, CSS, JavaScript)
+app = Flask(__name__)
+CORS(app)
 
-### index.html
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Platform</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div id="app"></div>
-    <script src="app.js"></script>
-</body>
-</html>
+# EventGen
+@app.route('/api/eventgen', methods=['POST'])
+def eventgen():
+    data = request.json
+    # Placeholder logic for event generation
+    return jsonify({"event": f"Generated event from {data['prompt']}"})
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+# VideoGen
+@app.route('/api/videogen', methods=['POST'])
+def videogen():
+    data = request.json
+    # Placeholder logic for video generation
+    return jsonify({"video": f"Generated video from {data['text']} and {data['image']}"})
 
-const apiBaseUrl = 'http://localhost:3000/api';
+# FaceSwap
+@app.route('/api/faceswap', methods=['POST'])
+def faceswap():
+    data = request.json
+    # Placeholder logic for face swapping
+    return jsonify({"result": "Face swapped successfully"})
 
-async function fetchData(endpoint) {
-    const response = await fetch(`${apiBaseUrl}/${endpoint}`);
-    return response.json();
-}
+# VoiceAI
+@app.route('/api/voiceai', methods=['POST'])
+def voiceai():
+    data = request.json
+    # Placeholder logic for text-to-speech
+    return jsonify({"audio": f"Generated audio from {data['text']}"})
 
-// Example function to call EventGen API
-async function generateEvent(prompt) {
-    const response = await fetch(`${apiBaseUrl}/eventgen`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
-    });
-    return response.json();
-}
- const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const port = 3000;
+# SiteBuilder
+@app.route('/api/sitebuilder', methods=['POST'])
+def sitebuilder():
+    data = request.json
+    # Placeholder logic for site building
+    return jsonify({"site": "Site built successfully"})
 
-app.use(bodyParser.json());
+# Persona
+@app.route('/api/persona', methods=['POST'])
+def persona():
+    data = request.json
+    # Placeholder logic for persona building
+    return jsonify({"persona": f"Persona created from {data['input']}"})
 
-// EventGen Route
-app.post('/api/eventgen', (req, res) => {
-    // Placeholder logic for event generation
-    res.json({ message: 'Event generated', data: req.body });
-});
+# SocialEntertainment
+@app.route('/api/socialentertainment', methods=['GET'])
+def socialentertainment():
+    # Placeholder logic for social tool
+    return jsonify({"message": "Social entertainment interface"})
 
-// VideoGen Route
-app.post('/api/videogen', (req, res) => {
-    // Placeholder logic for video generation
-    res.json({ message: 'Video generated', data: req.body });
-});
+# API Manager
+@app.route('/api/routes', methods=['GET'])
+def api_manager():
+    routes = [rule.rule for rule in app.url_map.iter_rules()]
+    return jsonify({"routes": routes})
 
-// FaceSwap Route
-app.post('/api/faceswap', (req, res) => {
-    // Placeholder logic for face swapping
-    res.json({ message: 'Face swapped', data: req.body });
-});
+# Model Uploader
+@app.route('/api/modelupload', methods=['POST'])
+def model_uploader():
+    # Placeholder logic for model upload
+    return jsonify({"message": "Model uploaded successfully"})
 
-// VoiceAI Route
-app.post('/api/voiceai', (req, res) => {
-    // Placeholder logic for text-to-speech
-    res.json({ message: 'Voice generated', data: req.body });
-});
+# User Dashboard
+@app.route('/api/user', methods=['POST'])
+def user_dashboard():
+    data = request.json
+    # Placeholder logic for user authentication
+    return jsonify({"user": f"User {data['username']} authenticated"})
 
-// SiteBuilder Route
-app.post('/api/sitebuilder', (req, res) => {
-    // Placeholder logic for site building
-    res.json({ message: 'Site built', data: req.body });
-});
-
-// Persona Route
-app.post('/api/persona', (req, res) => {
-    // Placeholder logic for avatar building
-    res.json({ message: 'Persona created', data: req.body });
-});
-
-// SocialEntertainment Route
-app.post('/api/socialentertainment', (req, res) => {
-    // Placeholder logic for social tool
-    res.json({ message: 'Social tool accessed', data: req.body });
-});
-
-// API Manager Route
-app.get('/api/routes', (req, res) => {
-    res.json({ routes: ['/eventgen', '/videogen', '/faceswap', '/voiceai', '/sitebuilder', '/persona', '/socialentertainment'] });
-});
-
-// Model Uploader Route
-app.post('/api/modeluploader', (req, res) => {
-    // Placeholder logic for model upload
-    res.json({ message: 'Model uploaded', data: req.body });
-});
-
-// User Dashboard Route
-app.post('/api/userdashboard', (req, res) => {
-    // Placeholder logic for user authentication
-    res.json({ message: 'User authenticated', data: req.body });
-});
-
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+if __name__ == '__main__':
+    app.run(debug=True)
